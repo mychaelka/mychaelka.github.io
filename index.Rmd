@@ -138,7 +138,7 @@ model_boost <- train(classe ~., data = train_data, method = "gbm", verbose = FAL
 ```
 
 ## **Prediction**  
-The random forest model with 10-fold cross-validation provides the highest accuracy, but takes a very long time to compute. The boosting model is even more computationally demanding and provides less accuracy than both the 3-fold and 10-fold cross-validation random forest models. For this prediction, we are going to use the 10-fold model, however, the difference between the 3 and 10 folds is not big when talking about accuracy, but significant when talking about computing time. 
+The random forest model with 10-fold cross-validation provides the highest accuracy, more than 99%, but takes a very long time to compute. The boosting model is even more computationally demanding and provides less accuracy than both the 3-fold and 10-fold cross-validation random forest models. For this prediction, we are going to use the 10-fold model, however, the difference between the 3 and 10 folds is not big when talking about accuracy, but significant when talking about computing time. 
 
 ```{r pred, eval=FALSE}
 prediction <- predict(model10, newdata = test_data)
