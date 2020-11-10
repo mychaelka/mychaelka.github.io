@@ -401,6 +401,10 @@ library(naniar)</code></pre>
 <p>Both the training and the testing datasest need to be pre-processed in the same way so that our predictions are valid and make sense. We can first have a look at the structure of the data and some summary statistics</p>
 <pre class="r"><code>str(training) # the dplyr package included in tidyverse provides a prettier and more structured output than the base function str()
 summary(training)
+
+dim(training)
+dim(testing)
+
 names(training)
 names(testing) # the testing set doesn&#39;t include the classe variable</code></pre>
 <p>We can see that the <code>classe</code> variable is of class character. We need to convert it to class factor, so that it can be handled as a categorical variable.</p>
@@ -472,10 +476,16 @@ model3 &lt;- train(classe ~., data = train_data, trControl = train_control3, met
 
 # boosting
 model_boost &lt;- train(classe ~., data = train_data, method = &quot;gbm&quot;, verbose = FALSE)</code></pre>
+<div id="in-sample-error" class="section level3">
+<h3><strong>In-sample error</strong></h3>
+<pre class="r"><code>confusionMatrix(model10) #99% accuracy
+confusionMatrix(model3) #96% accuracy
+confusionMatrix(model_boost) #86% accuracy</code></pre>
+</div>
 </div>
 <div id="prediction" class="section level2">
 <h2><strong>Prediction</strong></h2>
-<p>The random forest model with 10-fold cross-validation provides the highest accuracy, more than 99%, but takes a very long time to compute. The boosting model is even more computationally demanding and provides less accuracy than both the 3-fold and 10-fold cross-validation random forest models. For this prediction, we are going to use the 10-fold model, however, the difference between the 3 and 10 folds is not big when talking about accuracy, but significant when talking about computing time.</p>
+<p>The random forest model with 10-fold cross-validation provides the highest accuracy, more than 99%, but takes a very long time to compute. The boosting model is even more computationally demanding and provides less accuracy than both the 3-fold and 10-fold cross-validation random forest models (around 86%). For this prediction, we are going to use the 10-fold model, however, the difference between the 3 and 10 folds is not big when talking about accuracy, but significant when talking about computing time.</p>
 <pre class="r"><code>prediction &lt;- predict(model10, newdata = test_data)
 test_data$classe &lt;- prediction</code></pre>
 </div>
