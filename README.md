@@ -1,2 +1,2 @@
-# Coursera practical machine learning project
+# Personal website
 Type *https://mychaelka.github.io/* in your browser.
